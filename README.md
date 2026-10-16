@@ -1,5 +1,7 @@
 # life/cv
 
+**[Open the gallery →](https://noorbsharma21.github.io/life-cv/)**
+
 A dashboard for the CV of a life.
 
 An input agent — **Wren** — interviews you for three minutes and then builds a curated show of
