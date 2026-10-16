@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>life/cv — a curated show of one person</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Hanken+Grotesk:ital,wght@0,200..800;1,200..800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="sky" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand__mark" aria-hidden="true">
+      <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="9.2" stroke="currentColor" stroke-width="1.2"/><circle cx="14" cy="14" r="4" fill="currentColor"/><circle cx="24" cy="7" r="2.1" fill="currentColor" opacity=".55"/></svg>
+    </span>
+    <span class="brand__text">
+      <b>life<i>/</i>cv</b>
+      <em>a curated show of one person</em>
+    </span>
+  </div>
+
+  <nav class="views" aria-label="Views">
+    <button class="view is-on" data-scroll="rooms">Gallery</button>
+    <button class="view" data-scroll="strip">Timeline</button>
+    <button class="view" data-scroll="holding">Holding room</button>
+  </nav>
+
+  <div class="topbar__right">
+    <button class="icon-btn" id="rehang" title="Rehang the show">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 7h5l6 10h5"/><path d="M4 17h5l2-3.2"/><path d="M14.5 8.4L16 7l-1.5-1.4M17 20l1.6-1.5L17 17"/></svg>
+    </button>
+    <button class="icon-btn" id="exportBtn" title="Export this life">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 15V4m0 0L8.5 7.5M12 4l3.5 3.5"/><path d="M5 14v4.5A1.5 1.5 0 006.5 20h11a1.5 1.5 0 001.5-1.5V14"/></svg>
+    </button>
+    <button class="avatar" id="whoami" title="Who this is about"><span id="initials">—</span></button>
+  </div>
+</header>
+
+<main class="canvas">
+
+  <!-- ░░ TOP BENTO ░░ -->
+  <section class="bento" aria-label="Where you are right now">
+
+    <article class="card era" style="--i:1" id="eraCard">
+      <div class="mesh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="era__body">
+        <p class="eyebrow light">The era you appear to be in</p>
+        <h2 class="era__name" contenteditable="plaintext-only" data-edit="person.era" spellcheck="false">Becoming</h2>
+        <div class="dotnum" id="eraYears" data-dots="4"></div>
+        <p class="era__sub"><span contenteditable="plaintext-only" data-edit="person.eraSub" spellcheck="false">years in. Began the summer you moved out.</span></p>
+        <div class="ruler" aria-hidden="true"></div>
+        <div class="era__eras" id="eraChips"></div>
+      </div>
+      <button class="ghost-edit" data-open-era title="Rename this era">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>
+      </button>
+    </article>
+
+    <article class="card pass" style="--i:2">
+      <div class="pass__head">
+        <p class="eyebrow">Wren's first pass</p>
+        <span class="chip chip--lime" id="passLabel">pass 1</span>
+      </div>
+      <div class="ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="ring__track" cx="60" cy="60" r="52"/>
+          <circle class="ring__fill" cx="60" cy="60" r="52" id="ringFill"/>
+        </svg>
+        <div class="ring__mid">
+          <strong id="answered">12</strong>
+          <span>of <span id="totalQ">40</span><br>things known</span>
+        </div>
+      </div>
+      <p class="pass__note">She only got three minutes. Everything here is a first draft of you —
+        <b>correct her freely.</b></p>
+      <button class="btn btn--dark" id="startPass">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 1.6"/></svg>
+        Give her 3 more minutes
+      </button>
+    </article>
+
+    <article class="card ask" style="--i:3" id="askCard">
+      <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="ask__top">
+        <p class="eyebrow light">Wren is asking</p>
+        <span class="clock" id="clock" hidden>3:00</span>
+      </div>
+      <p class="ask__q" id="askQ">What song could you not listen to for a year, and why?</p>
+      <form class="ask__form" id="askForm" autocomplete="off">
+        <input id="askInput" placeholder="say it however it comes out…" aria-label="Your answer" />
+        <button class="send" type="submit" title="Hand it over">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg>
+        </button>
+      </form>
+      <div class="ask__foot">
+        <button class="linklike" id="skipQ">ask me something else</button>
+        <span class="dotpulse" aria-hidden="true"></span>
+      </div>
+    </article>
+
+    <article class="card threads" style="--i:4" id="threadsCard">
+      <div class="threads__head">
+        <div>
+          <p class="eyebrow">Threads she's still pulling</p>
+          <h3>Three things she suspects but won't write down yet</h3>
+        </div>
+        <span class="chip" id="threadCount">3 open</span>
+      </div>
+      <ul class="threadlist" id="threadList"></ul>
+    </article>
+  </section>
+
+  <!-- ░░ THE ROOMS ░░ -->
+  <section class="section-head" id="rooms">
+    <div>
+      <h2 class="h-display">The rooms</h2>
+      <p class="sub">Six walls of you. Everything is a guess until you say it isn't.</p>
+    </div>
+    <button class="btn btn--ghost" id="addRoom">+ new room</button>
+  </section>
+
+  <section class="roomgrid" id="roomGrid"></section>
+
+  <!-- ░░ TIMELINE ░░ -->
+  <section class="card strip" id="strip">
+    <div class="strip__head">
+      <div>
+        <p class="eyebrow">The long line</p>
+        <h3>Years she has something for</h3>
+      </div>
+      <button class="btn btn--ghost" id="addEvent">+ mark a year</button>
+    </div>
+    <div class="rail" id="rail"></div>
+  </section>
+
+  <!-- ░░ HOLDING ROOM + PICKS ░░ -->
+  <section class="lower">
+    <article class="card holding" id="holding">
+      <div class="holding__head">
+        <div>
+          <p class="eyebrow">Holding room</p>
+          <h3>Heard, but she couldn't place it</h3>
+        </div>
+        <span class="chip chip--lime" id="holdCount">0</span>
+      </div>
+      <ul class="holdlist" id="holdList"></ul>
+      <p class="holding__empty" id="holdEmpty" hidden>Nothing loose. She's filed everything you've said.</p>
+    </article>
+
+    <article class="card mirror">
+      <p class="eyebrow light">What the show says about you, today</p>
+      <p class="mirror__line" id="mirrorLine">—</p>
+      <button class="linklike light" id="rewriteMirror">say it differently</button>
+    </article>
+  </section>
+
+  <section class="section-head">
+    <div>
+      <h2 class="h-display">Pulled for you</h2>
+      <p class="sub">Things Wren thinks belong in your show. Pin them, or tell her no.</p>
+    </div>
+  </section>
+  <section class="picks" id="picks"></section>
+
+  <footer class="footer">
+    <p>made at <span class="mono" id="stamp"></span> · everything lives in this browser, nowhere else</p>
+    <div class="footer__acts">
+      <button class="linklike" id="resetAll">start this life over</button>
+    </div>
+  </footer>
+</main>
+
+<!-- ░░ ROOM EDITOR ░░ -->
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Room editor">
+  <header class="drawer__head">
+    <div class="drawer__id">
+      <span class="orb-sm" id="drawerOrb"></span>
+      <div>
+        <p class="eyebrow">Editing the room</p>
+        <h2 contenteditable="plaintext-only" id="drawerTitle" spellcheck="false">Music</h2>
+      </div>
+    </div>
+    <button class="icon-btn" id="closeDrawer" title="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17"/></svg>
+    </button>
+  </header>
+
+  <p class="drawer__blurb" contenteditable="plaintext-only" id="drawerBlurb" spellcheck="false"></p>
+
+  <div class="drawer__meta">
+    <label class="toggle">
+      <input type="checkbox" id="drawerPublic" />
+      <span class="toggle__track"><span class="toggle__knob"></span></span>
+      <span class="toggle__label">hung in the gallery</span>
+    </label>
+    <span class="fullness" id="drawerFull"></span>
+  </div>
+
+  <div class="entries" id="entries"></div>
+
+  <div class="drawer__add">
+    <button class="btn btn--dark w-full" id="addEntry">+ add something she missed</button>
+    <button class="btn btn--ghost w-full" id="askMore">ask Wren to dig here</button>
+  </div>
+</aside>
+
+<!-- ░░ WREN DOCK ░░ -->
+<section class="dock" id="dock" data-open="false">
+  <button class="dock__tab" id="dockTab">
+    <span class="dock__bird" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 14c3.5 0 5-2 6-4s2.5-4 5-4c2 0 4 1.4 4 4 0 4.5-4 8-9 8-3.5 0-6-1.6-6-4z"/><circle cx="16.4" cy="8.4" r=".9" fill="currentColor"/></svg>
+    </span>
+    <span>Wren</span>
+    <span class="dock__badge" id="dockBadge">0</span>
+  </button>
+  <div class="dock__panel">
+    <div class="dock__log" id="dockLog"></div>
+    <form class="dock__form" id="dockForm" autocomplete="off">
+      <input id="dockInput" placeholder="tell her anything, any order" aria-label="Message Wren" />
+      <button class="send send--dark" type="submit" title="Send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 12h13M13 6.5l5.5 5.5L13 17.5"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<div class="toast" id="toast" hidden><span id="toastText"></span><button id="toastUndo">undo</button></div>
+
+<script src="app.js"></script>
+</body>
+</html>
